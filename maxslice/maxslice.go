@@ -1,6 +1,8 @@
 package maxslice
 
-// O(n2)
+import "fmt"
+
+// O(n2) /// GAH this actually doesn't quite work either since it can pull a single.
 func FindMax(s []int) int {
 	l, result := len(s), 0
 	for i := 0; i < l; i++ {
@@ -9,10 +11,12 @@ func FindMax(s []int) int {
 			//			fmt.Printf("%d %d %d\n", i, u, result)
 			u += s[n]
 			// has result be set yet?
-			if i == 0 {
+			if i < 2 {
 				result = u
+			} else {
+				result = Max(result, u)
 			}
-			result = Max(result, u)
+
 		}
 	}
 
@@ -27,8 +31,9 @@ func FindMaxB(s []int) int {
 
 	i := 0
 	for _, n := range s {
-		if i == 0 {
-			start = n
+		if i < 2 {
+			start = mEnd + n
+			fmt.Printf("%d %d %d\n", start, mEnd, n)
 		}
 		//		fmt.Printf("%d %d %d\n", n, mEnd, mS)
 		mEnd = Max(start, mEnd+n)
