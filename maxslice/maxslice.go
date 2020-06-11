@@ -8,6 +8,10 @@ func FindMax(s []int) int {
 		for n := i; n < l; n++ {
 			//			fmt.Printf("%d %d %d\n", i, u, result)
 			u += s[n]
+			// has result be set yet?
+			if i == 0 {
+				result = u
+			}
 			result = Max(result, u)
 		}
 	}
@@ -17,13 +21,19 @@ func FindMax(s []int) int {
 
 // I HATE nested loops.... but I wanted to leave the original attempt (since that was what I was working toward)... I
 // think this is O(n)
+// this doesn't work yet for all - integers
 func FindMaxB(s []int) int {
 	var start, mEnd, mS int = 0, 0, 0
 
+	i := 0
 	for _, n := range s {
+		if i == 0 {
+			start = n
+		}
 		//		fmt.Printf("%d %d %d\n", n, mEnd, mS)
 		mEnd = Max(start, mEnd+n)
 		mS = Max(mS, mEnd)
+		i++
 	}
 
 	return mS
