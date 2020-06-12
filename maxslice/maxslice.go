@@ -31,11 +31,19 @@ func FindMax(s []int) int {
 
 			fmt.Printf("Current Sum of U for index %+d is: %+d\n", n, u)
 			// has result be set yet?
-			fmt.Printf("Evaluating greater of last result: %+d and current computed result %+d\n", result, u)
+
 			// we want to set the result only after we have the sum of 2 indexes and never when only a single index is included
 			// set our first result if we have 2 or more addends
 			if addends > 1 {
-				result = Max(result, u)
+
+				if i == 0 {
+					fmt.Printf("Seeding result with initial value of %+d\n", u)
+					result = u
+				} else {
+					fmt.Printf("Evaluating greater of result: %+d and current computed sum %+d\n", result, u)
+					result = Max(result, u)
+				}
+
 			}
 
 		}
