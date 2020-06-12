@@ -1,15 +1,32 @@
 package maxslice
 
+import "fmt"
+
+type Solution int
+
 // O(n2)
 func FindMax(s []int) int {
-	l, result := len(s), 0
+	var result int
+	l := len(s)
 	for i := 0; i < l; i++ {
-		u := 0
+		var u int /// I want the number to be negative
+		fmt.Printf("Iteration %d\n", i)
+
 		for n := i; n < l; n++ {
 			//			fmt.Printf("%d %d %d\n", i, u, result)
-			u += s[n]
-			// has result be set yet?
+			// Check if u is initialized
+			if n == 0 {
+				fmt.Printf("Var u is empty for index %d, skipping sum and assigning to %d...\n", n, s[n])
+				u = s[n]
+				continue
+			} else {
+				fmt.Printf("Summing %d + %d for index %d...\n", u, s[n], n)
+				u += s[n]
+			}
 
+			fmt.Printf("Current Sum of U for index %d is: %d\n", n, u)
+			// has result be set yet?
+			fmt.Printf("Evaluating greater of last result: %d and current computed result %d", result, u)
 			result = Max(result, u)
 		}
 	}
