@@ -8,7 +8,7 @@ type Solution int
 func FindMax(s []int) int {
 	var result int
 	l := len(s)
-	for i := 0; i < l; i++ {
+	for i := 1; i < l-1; i++ {
 		var u int /// I want the number to be negative
 		fmt.Printf("Iteration %d\n", i)
 
@@ -22,11 +22,12 @@ func FindMax(s []int) int {
 			} else {
 				fmt.Printf("Summing %d + %d for index %d...\n", u, s[n], n)
 				u += s[n]
+				fmt.Printf("Sum is: %d\n", u)
 			}
 
 			fmt.Printf("Current Sum of U for index %d is: %d\n", n, u)
 			// has result be set yet?
-			fmt.Printf("Evaluating greater of last result: %d and current computed result %d", result, u)
+			fmt.Printf("Evaluating greater of last result: %d and current computed result %d\n", result, u)
 			result = Max(result, u)
 		}
 	}
