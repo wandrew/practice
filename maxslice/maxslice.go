@@ -13,8 +13,10 @@ func FindMax(s []int) int {
 		fmt.Printf("Iteration %d\n", i)
 
 		addends := 0
+		var addendSlice []int
 		for n := i; n < l; n++ {
 			addends += 1
+			addendSlice = append(addendSlice, s[n])
 			//			fmt.Printf("%d %d %d\n", i, u, result)
 			// Check if u is initialized
 			if n == i {
@@ -22,7 +24,7 @@ func FindMax(s []int) int {
 				u = s[n]
 				continue
 			} else {
-				fmt.Printf("Summing %+d + %+d for index %+d...\n", u, s[n], n)
+				fmt.Printf("Summing %+d + %+d (total of %v) for index %+d...\n", u, s[n], addendSlice, n)
 				u += s[n]
 				fmt.Printf("Sum is: %+d\n", u)
 			}
