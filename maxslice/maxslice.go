@@ -12,7 +12,7 @@ func FindMax(s []int) int {
 	l := len(s)
 	for i := 0; i < l; i++ {
 		var u int /// I want the number to be negative
-		fmt.Printf("Iteration %d\n", i)
+		//fmt.Printf("Iteration %d\n", i)
 
 		addends := 0
 		var addendSlice []int
@@ -22,16 +22,16 @@ func FindMax(s []int) int {
 			//			fmt.Printf("%d %d %d\n", i, u, result)
 			// Check if u is initialized
 			if n == i {
-				fmt.Printf("Var u is empty for index %+d, skipping sum and assigning to %+d...\n", n, s[n])
+				//fmt.Printf("Var u is empty for index %+d, skipping sum and assigning to %+d...\n", n, s[n])
 				u = s[n]
 				continue
 			} else {
-				fmt.Printf("Summing %+d + %+d (total of %v) for index %+d...\n", u, s[n], addendSlice, n)
+				//fmt.Printf("Summing %+d + %+d (total of %v) for index %+d...\n", u, s[n], addendSlice, n)
 				u += s[n]
-				fmt.Printf("Sum is: %+d\n", u)
+				//fmt.Printf("Sum is: %+d\n", u)
 			}
 
-			fmt.Printf("Current Sum of U for index %+d is: %+d\n", n, u)
+			//fmt.Printf("Current Sum of U for index %+d is: %+d\n", n, u)
 			// has result be set yet?
 
 			// we want to set the result only after we have the sum of 2 indexes and never when only a single index is included
@@ -39,10 +39,10 @@ func FindMax(s []int) int {
 			if addends > 1 {
 
 				if i == 0 {
-					fmt.Printf("Seeding result with initial value of %+d\n", u)
+					//fmt.Printf("Seeding result with initial value of %+d\n", u)
 					result = u
 				} else {
-					fmt.Printf("Evaluating greater of result: %+d and current computed sum %+d\n", result, u)
+					//fmt.Printf("Evaluating greater of result: %+d and current computed sum %+d\n", result, u)
 					result = Max(result, u)
 				}
 
@@ -71,34 +71,34 @@ func FindMaxOptimized(s []int) (int, error) { // O(n log)
 			break
 		} // current window
 		sz := l - i
-		fmt.Printf("Current window size is (inclusive) %v\n", sz)
+		//fmt.Printf("Current window size is (inclusive) %v\n", sz)
 
 		// move the window
 		eoIndex := boIndex + sz - 1
-		fmt.Printf("Window index span is from %d to %d\n", boIndex, eoIndex)
-		fmt.Printf("Current addend is s[%d] and has a value of %d\n", addendI, s[addendI])
+		//fmt.Printf("Window index span is from %d to %d\n", boIndex, eoIndex)
+		//fmt.Printf("Current addend is s[%d] and has a value of %d\n", addendI, s[addendI])
 		if boIndex == addendI {
-			fmt.Printf("Setting intial lSum to %d\n", s[addendI])
+			//fmt.Printf("Setting intial lSum to %d\n", s[addendI])
 			lSum = s[addendI]
 		} else {
-			fmt.Printf("Adding current added %d to lSum %d\n", s[addendI], lSum)
+			//fmt.Printf("Adding current added %d to lSum %d\n", s[addendI], lSum)
 
 			lSum += s[addendI]
 		}
 
 		if addendI >= eoIndex {
 			if i == 0 { // this is our first itration, we don't want to evaluate a 0, so we'll just set it
-				fmt.Printf("Setting first rSum to %d\n", lSum)
+				//fmt.Printf("Setting first rSum to %d\n", lSum)
 				rSum = lSum
 			} else {
-				fmt.Printf("Evaluating max of (rSum) %d and (lSum) %d\n", rSum, lSum)
+				//fmt.Printf("Evaluating max of (rSum) %d and (lSum) %d\n", rSum, lSum)
 				rSum = Max(rSum, lSum)
 			}
 
 			if eoIndex >= l-1 {
 				i += 1
 				boIndex = 0
-				fmt.Printf("\n\n Iteration Ends\n\n")
+				//fmt.Printf("\n\n Iteration Ends\n\n")
 			} else {
 				boIndex += 1
 			}

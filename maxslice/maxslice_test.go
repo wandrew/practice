@@ -51,6 +51,20 @@ func TestFindMaxOptimized(t *testing.T) {
 	}
 }
 
+func BenchmarkFindMax(b *testing.B) {
+	test := []int{-1, -4, 4, 4, -9, 10}
+	for n := 0; n < b.N; n++ {
+		FindMax(test)
+	}
+}
+
+func BenchmarkFindMaxOptimized(b *testing.B) {
+	test := []int{-1, -4, 4, 4, -9, 10}
+	for n := 0; n < b.N; n++ {
+		FindMaxOptimized(test)
+	}
+}
+
 //func TestFindMaxB(t *testing.T) { // this is still broken
 //	tests := map[int][]int{
 //		9: {-1, -4, 4, 4, -9, 10}, // this was just wrong... it WAS 9 [4,4,-9,10]
