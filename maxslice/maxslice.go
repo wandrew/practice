@@ -55,14 +55,18 @@ func FindMax(s []int) int {
 	return result
 }
 
-func FindMaxOptimized(s []int) int {
+func FindMaxOptimized(s []int) (int, error) {
 
 	l := len(s)
-	//if l < 3 {
-	//	return -1, fmt.Errorf("slice must have 3 or more nodes")
-	//}
+	if l < 3 {
+		return -1, fmt.Errorf("slice must have 3 or more nodes")
+	}
 
 	i := 0
+	boIndex := 0
+	addendI := boIndex
+	var rSum int
+	var lSum int
 	for {
 		if i >= l-1 {
 			break
@@ -71,19 +75,43 @@ func FindMaxOptimized(s []int) int {
 		fmt.Printf("Current window size is (inclusive) %v\n", sz)
 
 		// move the window
+		eoIndex := boIndex + sz - 1
+		fmt.Printf("Window index span is from %d to %d\n", boIndex, eoIndex)
+		fmt.Printf("Current addend is s[%d] and has a value of %d\n", addendI, s[addendI])
+		if boIndex == addendI {
+			fmt.Printf("Setting intial lSum to %d\n", s[addendI])
+			lSum = s[addendI]
+		} else {
+			fmt.Printf("Adding current added %d to lSum %d\n", s[addendI], lSum)
 
-		//if 0+i != l-i {
-		//	sz := (l - i) - (0 + i)
-		//	fmt.Printf("Current window size is (inclusive) %v\n", sz)
-		//	win := []int{0 + i, l - i}
-		//	fmt.Printf("Current window is (inclusive) %v\n", win)
-		//}
-		i += 1
+			lSum += s[addendI]
+		}
+
+		if addendI >= eoIndex {
+			if i == 0 { // this is our first itration, we don't want to evaluate a 0, so we'll just set it
+				fmt.Printf("Setting first rSum to %d\n", lSum)
+				rSum = lSum
+			} else {
+				fmt.Printf("Evaluating max of (rSum) %d and (lSum) %d\n", rSum, lSum)
+				rSum = Max(rSum, lSum)
+			}
+
+			if eoIndex >= l-1 {
+				i += 1
+				boIndex = 0
+				fmt.Printf("\n\n Iteration Ends\n\n")
+			} else {
+				boIndex += 1
+			}
+			addendI = boIndex
+		} else {
+			addendI += 1
+		}
 
 	}
 
 	//	return -1, fmt.Errorf("this function isn't functional")
-	return -1
+	return rSum, nil
 }
 
 // I HATE nested loops.... but I wanted to leave the original attempt (since that was what I was working toward)... I
