@@ -2,7 +2,6 @@ package maxslice
 
 import (
 	"fmt"
-	"math"
 )
 
 type Solution int
@@ -114,28 +113,14 @@ func FindMaxOptimized(s []int) (int, error) { // O(n log)
 	return rSum, nil
 }
 
-// I HATE nested loops.... but I wanted to leave the original attempt (since that was what I was working toward)... I
-// think this is O(n)
+// I could never get this one to work with all negative values
 func FindMaxB(s []int) int {
-	var mEnd, mS float64 = math.Inf(-1), math.Inf(-1)
+	var mEnd, mS int
 	//9:  {-1, -4, 4, 4, -9, 10},             // this was just wrong... it WAS 9 [4,4,-9,10]
 
-	// first window
-
-	for i, n := range s {
-		fmt.Printf("\n\nIteration %d\n", i)
-		fmt.Printf("evaluating (mS) %v\n", mS)
-
-		fmt.Printf("evaluating (mEnd) %v\n", mEnd)
-		fmt.Printf("evaluating (n) %v\n", n)
-
-		fmt.Printf("evaluating (mEnd+n) %v\n", mEnd+float64(n))
-		mEnd = MaxFloat(float64(n), mEnd+float64(n))
-		fmt.Printf("calculated (mEnd) %v\n", mEnd)
-		if i > 0 {
-
-			mS = MaxFloat(mS, mEnd)
-		}
+	for _, n := range s {
+		mEnd = Max(0, mEnd+n)
+		mS = Max(mS, mEnd)
 
 	}
 
@@ -144,12 +129,6 @@ func FindMaxB(s []int) int {
 
 // Max returns the larger of x or y.
 func Max(x, y int) int {
-	if x < y {
-		return y
-	}
-	return x
-}
-func MaxFloat(x, y float64) float64 {
 	if x < y {
 		return y
 	}

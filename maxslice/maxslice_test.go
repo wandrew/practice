@@ -29,6 +29,8 @@ func TestFindMaxOptimized(t *testing.T) {
 		{-200},
 		{1},
 		{123122},
+		{1, 2},
+		{0, 2},
 	}
 
 	for expected, test := range goodTests {
