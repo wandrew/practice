@@ -55,7 +55,7 @@ func FindMax(s []int) int {
 	return result
 }
 
-func FindMaxOptimized(s []int) (int, error) {
+func FindMaxOptimized(s []int) (int, error) { // O(n log)
 
 	l := len(s)
 	if l < 3 {
